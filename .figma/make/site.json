@@ -1,0 +1,10 @@
+{
+  "description": "Showcases premium web design services with an engaging portfolio and collects detailed client project requirements via a responsive inquiry form linked to Google Sheets.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
