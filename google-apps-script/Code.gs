@@ -18,18 +18,36 @@ function doPost(e) {
       sheet.appendRow([
         "Submitted At", "Name", "Brand", "Website Type", "Goals",
         "Existing Website", "Domain", "Style", "Inspiration", "Budget",
-        "Timeline", "Email", "Phone", "Contact Method"
+        "Timeline", "Email", "Phone", "Contact Method", "Industry",
+        "Business Overview"
       ]);
       sheet.setFrozenRows(1);
     }
 
     var data = JSON.parse(e.postData.contents);
+
+    // Auto-migrate if sheet was created with older 14-column layout
+    if (!sheet.getRange(1, 15).getValue()) {
+      sheet.getRange(1, 15, 1, 2).setValues([["Industry", "Business Overview"]]);
+    }
+
     sheet.appendRow([
-      data.submittedAt || new Date(), data.name || "", data.brand || "",
-      data.websiteType || "", data.goals || "", data.existingWebsite || "",
-      data.domain || "", data.style || "", data.inspiration || "",
-      data.budget || "", data.timeline || "", data.email || "",
-      data.phone || "", data.contactMethod || ""
+      data.submittedAt || new Date(),
+      data.name || "",
+      data.brand || "",
+      data.websiteType || "",
+      data.goals || "",
+      data.existingWebsite || "",
+      data.domain || "",
+      data.style || "",
+      data.inspiration || "",
+      data.budget || "",
+      data.timeline || "",
+      data.email || "",
+      data.phone || "",
+      data.contactMethod || "",
+      data.industry || "",
+      data.businessOverview || ""
     ]);
 
     // Send instant email notification to your inbox
@@ -42,8 +60,10 @@ function doPost(e) {
           "<h2 style='color:#111;border-bottom:2px solid #e2ff3b;padding-bottom:8px;'>New Project Brief Received!</h2>" +
           "<p>A potential client just submitted the project enquiry form on D3 Studio.</p>" +
           "<table style='width:100%;border-collapse:collapse;margin-top:15px;font-size:14px;'>" +
-          "<tr><td style='padding:6px;font-weight:bold;width:140px;'>Name:</td><td>" + (data.name || "-") + "</td></tr>" +
+          "<tr><td style='padding:6px;font-weight:bold;width:150px;'>Name:</td><td>" + (data.name || "-") + "</td></tr>" +
           "<tr><td style='padding:6px;font-weight:bold;'>Brand:</td><td>" + (data.brand || "-") + "</td></tr>" +
+          "<tr><td style='padding:6px;font-weight:bold;'>Industry:</td><td>" + (data.industry || "-") + "</td></tr>" +
+          "<tr><td style='padding:6px;font-weight:bold;'>Business Overview:</td><td>" + (data.businessOverview || "-") + "</td></tr>" +
           "<tr><td style='padding:6px;font-weight:bold;'>Website Type:</td><td>" + (data.websiteType || "-") + "</td></tr>" +
           "<tr><td style='padding:6px;font-weight:bold;'>Goals:</td><td>" + (data.goals || "-") + "</td></tr>" +
           "<tr><td style='padding:6px;font-weight:bold;'>Existing Site:</td><td>" + (data.existingWebsite || "-") + "</td></tr>" +

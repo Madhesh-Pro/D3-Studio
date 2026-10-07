@@ -1,7 +1,8 @@
 {
-  "description": "Showcases premium web design services with an engaging portfolio and collects detailed client project requirements via a responsive inquiry form linked to Google Sheets.",
+  "title": "D3 STUDIO — Independent Digital Studio",
+  "description": "Custom websites designed, developed and launched for businesses, brands, creators and ambitious startups.",
   "robots": {
-    "index": false
+    "index": true
   },
   "accessibility": {
     "addBypassLinks": false,
